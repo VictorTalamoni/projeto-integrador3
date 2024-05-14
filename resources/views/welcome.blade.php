@@ -20,6 +20,13 @@ background-color: rgb(169, 250, 191);
         <center> <p> {{session ('msg')}} </p> </center>
     </div>
     @endif
+    <center><form action="/" method="GET"></center>
+    <input type="text" id="search" name="search" class="form-control" placeholder="Procure pelo nome aqui">
+    </form>
+    @if($search)
+        </p>
+        <center> Buscando pelo nome : {{$search}} </center>
+    @endif
 </div>
 <div class="card-body">
     <div class="table-responsive">

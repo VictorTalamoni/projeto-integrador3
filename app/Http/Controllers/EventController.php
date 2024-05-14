@@ -14,9 +14,20 @@ class EventController extends Controller
     }
     public function index(){
 
+        $search = request('search');
+        if($search){
+
+            $pessoal = pessoas::where([
+                ['nome', 'like', '%'.$search.'%']
+            ])->get();
+
+        }else{
+
         $pessoal = pessoas::all();
+
+        }
     
-        return view('welcome', ['pessoas' => $pessoal]);
+        return view('welcome', ['pessoas' => $pessoal, 'search' => $search]);
 }
 
     public function create(){
@@ -133,6 +144,7 @@ class EventController extends Controller
 
         return redirect('/')->with('msg','Dados editados com sucesso');
     }
+
 }
 
 
