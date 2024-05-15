@@ -30,39 +30,44 @@ class EventController extends Controller
 
     public function store(Request $request){
 
-            $cpfExistente = pessoas::where('cpf', $request->cpf)->exists();
-        
-            if($cpfExistente) {
-                return redirect('eventos/create')->withErrors(['cpf' => 'Erro, CPF duplicado!']);
-            }
-
-            $pessoal1 = new pessoas;
+        $cpfExistente = pessoas::where('cpf', $request->cpf)->exists();
     
-            $pessoal1->cpf = $request->cpf;
-            $pessoal1->nome = $request->nome;
-            $pessoal1->telefone = $request->number;
-            $pessoal1->telefone_referencia = $request->numberr;
-            $pessoal1->titular_numero_referencia = $request->nomer;
-            $pessoal1->endereco = $request->endereco;
-
-            if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
-
-                $requestFoto = $request->foto;
-
-                $extensao = $requestFoto->extension();
-
-                $nomeFoto = md5($requestFoto->getClientOriginalName() . strtotime("agora")) . "." . $extensao;
-
-                $requestFoto->move(public_path('img/pessoas'), $nomeFoto);
-
-                $pessoal1->imagem = $nomeFoto;
-
-            }
-    
-            $pessoal1->save();
-    
-            return redirect('eventos/create')->with('msg', 'Cadastro feito com sucesso!');
+        if($cpfExistente) {
+            return redirect('eventos/create')->withErrors(['cpf' => 'Erro, CPF duplicado!']);
         }
+    
+        $pessoal1 = new pessoas;
+    
+        $pessoal1->cpf = $request->cpf;
+        $pessoal1->nome = $request->nome;
+        $pessoal1->telefone = $request->number;
+        $pessoal1->telefone_referencia = $request->numberr;
+        $pessoal1->titular_numero_referencia = $request->nomer;
+        $pessoal1->endereco = $request->endereco;
+    
+        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
+    
+            $requestFoto = $request->foto;
+    
+            $extensao = $requestFoto->extension();
+    
+            // Check if the file extension is valid
+            if (!in_array($extensao, ['jpg', 'jpeg', 'png'])) {
+                return redirect('eventos/create')->withErrors(['foto' => 'Erro, extensão de arquivo não suportada!']);
+            }
+    
+            $nomeFoto = md5($requestFoto->getClientOriginalName() . strtotime("agora")) . "." . $extensao;
+    
+            $requestFoto->move(public_path('img/pessoas'), $nomeFoto);
+    
+            $pessoal1->imagem = $nomeFoto;
+        }
+    
+        $pessoal1->save();
+    
+        return redirect('eventos/create')->with('msg', 'Cadastro feito com sucesso!')->withErrors(['cpf' => 'Erro, CPF duplicado!']);
+    }
+    
 
     public function criar(){
         return view('criar');

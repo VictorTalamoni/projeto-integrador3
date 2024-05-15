@@ -67,6 +67,11 @@ background-color: rgb(169, 250, 191);
         <center> <p> {{session ('msg')}} </p> </center>
     </div>
     @endif
+    @if($errors->has('foto'))
+    <div class="alert alert-danger">
+        <center>{{ $errors->first('foto') }}</center>
+    </div>
+    @endif
     </div>
     </div>
     </form>
