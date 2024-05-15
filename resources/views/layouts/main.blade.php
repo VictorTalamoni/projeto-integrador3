@@ -11,6 +11,16 @@
 
     </head>
     <body style="@yield('styledobody')">
+    <style>
+    .pagination .page-link {
+    background-color: green;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: darkgreen;
+}
+</style>
     <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <span class="navbar-brand mb-0 h1 " style="color: green;">@yield('pagina')</span>

@@ -16,19 +16,13 @@ class EventController extends Controller
 
         $search = request('search');
         if($search){
-
-            $pessoal = pessoas::where([
-                ['nome', 'like', '%'.$search.'%']
-            ])->get();
-
+            $pessoal = pessoas::where('nome', 'like', '%'.$search.'%')->paginate(10);
         }else{
-
-        $pessoal = pessoas::all();
-
+            $pessoal = pessoas::paginate(10);
         }
     
         return view('welcome', ['pessoas' => $pessoal, 'search' => $search]);
-}
+    }
 
     public function create(){
         return view('eventos.create');

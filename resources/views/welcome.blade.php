@@ -53,5 +53,22 @@ background-color: rgb(169, 250, 191);
         <td><a href="/eventos/{{ $pessoal->cpf }}" class="btn btn-success">Visualizar</a></td>
     </tr>
     @endforeach
+
 </table>
+<div class="pagination d-flex justify-content-center">
+                            <ul class="pagination">
+                                @if ($pessoas->onFirstPage())
+                                
+                                    <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+                                @else
+                                    <li class="page-item"><a href="{{ $pessoas->previousPageUrl() }}" class="page-link green-btn">Anterior</a></li>
+                                @endif
+
+                                @if ($pessoas->hasMorePages())
+                                    <li class="page-item"><a href="{{ $pessoas->nextPageUrl() }}" class="page-link green-btn">Próximo</a></li>
+                                @else
+                                    <li class="page-item disabled"><span class="page-link">Próximo</span></li>
+                                @endif
+                            </ul>
+                        </div>
 @endsection
