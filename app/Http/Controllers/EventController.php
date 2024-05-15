@@ -51,7 +51,6 @@ class EventController extends Controller
     
             $extensao = $requestFoto->extension();
     
-            // Check if the file extension is valid
             if (!in_array($extensao, ['jpg', 'jpeg', 'png'])) {
                 return redirect('eventos/create')->withErrors(['foto' => 'Erro, extensão de arquivo não suportada!']);
             }
