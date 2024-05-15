@@ -13,12 +13,12 @@
     <body style="@yield('styledobody')">
     <style>
     .pagination .page-link {
-    background-color: green;
+    background-color: #078c4e;
     color: white;
 }
 
 .pagination .page-link:hover {
-    background-color: darkgreen;
+    background-color: #057843;
 }
 </style>
     <nav class="navbar bg-body-tertiary">
