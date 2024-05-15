@@ -18,7 +18,7 @@ class EventController extends Controller
         if($search){
             $pessoal = pessoas::where('nome', 'like', '%'.$search.'%')->paginate(10);
         }else{
-            $pessoal = pessoas::paginate(10);
+            $pessoal = pessoas::orderBy('nome')->paginate(10);
         }
     
         return view('welcome', ['pessoas' => $pessoal, 'search' => $search]);
@@ -52,7 +52,7 @@ class EventController extends Controller
             $extensao = $requestFoto->extension();
     
 
-            if (!in_array($extensao, ['jpg', 'jpeg', 'png'])) {
+            if (!in_array($extensao, ['jpg', 'jpeg', 'png', 'webp'])) {
                 return redirect('eventos/create')->withErrors(['foto' => 'Erro, extensão de arquivo não suportada!']);
             }
     
@@ -65,7 +65,7 @@ class EventController extends Controller
     
         $pessoal1->save();
     
-        return redirect('eventos/create')->with('msg', 'Cadastro feito com sucesso!')->withErrors(['cpf' => 'Erro, CPF duplicado!']);
+        return redirect('eventos/create')->with('msg', 'Cadastro feito com sucesso!');
     }
     
 
@@ -81,16 +81,15 @@ class EventController extends Controller
 
     public function destruir($cpf){
         $pessoa = pessoas::findOrFail($cpf);
-
+    
         $caminhoImagem = public_path('img/pessoas/') . $pessoa->imagem;
-        if (file_exists($caminhoImagem)) {
+        if (file_exists($caminhoImagem) && is_file($caminhoImagem)) {
             unlink($caminhoImagem);
         }
-
+    
         $pessoa->delete();
-
-
-        return redirect('/')->with('msg', 'Dado excluido com sucesso');
+    
+        return redirect('/')->with('msg', 'Dado excluído com sucesso');
     }
 
     public function editar($cpf){

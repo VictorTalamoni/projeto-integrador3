@@ -49,7 +49,7 @@ background-color: rgb(169, 250, 191);
         <td>{{ $pessoal->telefone_referencia }}</td>
         <td>{{ $pessoal->titular_numero_referencia }}</td>
         <td><a href="/eventos/editar/{{ $pessoal->cpf }}" class="btn btn-success">Editar</a></td>
-        <td><form action="/eventos/{{ $pessoal->cpf }}" method="POST">@csrf @method('DELETE')<button type="submit" class="btn btn-success delete-btn">Deletar</button></td>
+        <td><form action="/eventos/{{ $pessoal->cpf }}" method="POST">@csrf @method('DELETE')<button type="submit" class="btn btn-success delete-btn">Deletar</button></form></td>
         <td><a href="/eventos/{{ $pessoal->cpf }}" class="btn btn-success">Visualizar</a></td>
     </tr>
     @endforeach
