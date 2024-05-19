@@ -49,7 +49,7 @@ background-color: rgb(169, 250, 191);
     <label for="foto" class="form-label"><strong>Insira uma foto: </strong></label>
     <input type="file"  class="form-control" name="foto" id="foto" title="Insira uma foto">
     </p>
-    <center><img width='75%' height='400px' src="/img/pessoas/{{$pessoas ->imagem}}" alt="foto" class="img-preview"></center>
+    <center><img width='20%' height='300px' src="/img/pessoas/{{$pessoas ->imagem}}" alt="foto" class="img-preview"></center>
 
     <hr>
     <div class="text-center">
