@@ -32,7 +32,7 @@ background-color: rgb(169, 250, 191);
     <div class="table-responsive">
 <table class="table table-bordered text-center ">
     <tr class="table-success">
-        <td>CPF</td>
+        
         <td>Nome</td>
         <td>Telefone</td>
         <td>Telefone de Referência</td>
@@ -43,7 +43,7 @@ background-color: rgb(169, 250, 191);
     </tr>
     @foreach($pessoas as $pessoal)
     <tr>
-        <td>{{ str_pad($pessoal->cpf, 11, '0', STR_PAD_LEFT) }}</td>
+        
         <td>{{ $pessoal->nome }}</td>
         <td>{{ $pessoal->telefone }}</td>
         <td>{{ $pessoal->telefone_referencia }}</td>
